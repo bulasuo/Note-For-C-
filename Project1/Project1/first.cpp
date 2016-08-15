@@ -8,27 +8,45 @@ using namespace std;
 const int dss = 110;
 //ctrl + k + c; ctrl + k + u 注释
 
-struct struct1 {
+struct struct1 
+{
 	int id = 10;
 };
+
+int sum(int ar2[][4], int size) 
+{
+	cout << ar2[2][2] << endl;
+	cout << *(*(ar2 + 2) + 2) << endl;
+	return 19;
+}
 
 int main(void)
 {
 	cout << "start" << endl;
-	struct1 s0, s1, s2;
-	struct1* p_1 = &s0;//指针类型 struct1*    struct1地址
-	cout << p_1 -> id << endl;
-	struct1* p[] = {&s0,&s1,&s2};//指针类型是struct1*[]   struct1地址数组
-	cout << (*p) -> id << endl; 
-	struct1** pp = p;//指针类型是 struct1**   struct1地址* 即struct1地址地址 即struct1地址的数组
-	cout << (*pp)->id << endl;
+	/*int i[3] = {1,2,3};
+	cout << *(i+1) << endl;
+	cout << &i << endl;
+	cout << (&i)+1 << endl;*/
 
+	//struct1 s0, s1, s2;
+	//struct1* p_1 = &s0;//指针类型 struct1*    struct1地址
+	//cout << p_1 -> id << endl;
+	//struct1* p[] = {&s0,&s1,&s2};//指针类型是struct1*[]   struct1地址数组
+	//cout << (*p) -> id << endl; 
+	//struct1** pp = p;//指针类型是 struct1**   struct1地址* 即struct1地址地址 即struct1地址的数组
+	//cout << (*pp)->id << endl;
+
+	int data[3][4] = { {1,2,3,4},{5,6,7,8},{9,10,11,12} };
+	//函数原型:int sum(int (*ar2)[4], int size);
+	//或者 函数原型:int sum(int (int ar2[][4], int size);
+	int total = sum(data, 3);
+	cout << "sum-" << total << endl;
 	
-	char s[] = {'s', 'b', 'c' , '\0'};
+	/*char s[] = {'s', 'b', 'c' , '\0'};
 	cout << "--" << s << endl;
 	cout << "--" << &s << endl;
 	cout << "--" << *(&s) << endl;
-	cout << "--" << **(&s) << endl;
+	cout << "--" << **(&s) << endl;*/
 	//一个方法体里的内存会在运行完自动释放,所以如果有返回地址,并且希望保留改地址的值,则要使用new 一个地址并赋值,因为new 出来的东西不会自动释放内存 但是要记得手动释放内存
 	///////////////指针p 可以通过(int *)0x??赋值直接指向该0x??地址;   int * p = &i; 指的是把&i给p,而不是给*p,而申明的时候==**(int与*先结合)**==表明p是指向int型的指针,p的类型是int*,而*p是int
 	///////////////////////////////////////////////////////////////////,在申明好后的使用中p是指针是地址,*p是该地址存放的值 //////////////////////////////////////////////////////
