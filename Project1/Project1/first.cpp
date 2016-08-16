@@ -3,6 +3,7 @@
 #include<cstring>
 //using namespace std;
 void say(int);
+void action(void (*pf)(int));//此原型的参数是函数指针
 using namespace std;
 #define ds 90;
 const int dss = 110;
@@ -23,6 +24,22 @@ int sum(int ar2[][4], int size)
 int main(void)
 {
 	cout << "start" << endl;
+
+	//申明函数变量
+	void (*f99)(int) = say;//申明函数变量
+	action(*f99);//函数指针就是函数名,即函数地址
+	action(f99);//也可以这样写
+	action(say);//也可以这样写
+
+	void(*farray[3])(int) = {say,say,say};//申明函数变量
+	(*(*farray[1]))(333);
+	(*farray[1])(222);
+
+
+
+	//cout << "ss" << endl;
+	//cout << &"ss" << endl;//无意义
+
 	/*int i[3] = {1,2,3};
 	cout << *(i+1) << endl;
 	cout << &i << endl;
@@ -36,11 +53,11 @@ int main(void)
 	//struct1** pp = p;//指针类型是 struct1**   struct1地址* 即struct1地址地址 即struct1地址的数组
 	//cout << (*pp)->id << endl;
 
-	int data[3][4] = { {1,2,3,4},{5,6,7,8},{9,10,11,12} };
-	//函数原型:int sum(int (*ar2)[4], int size);
-	//或者 函数原型:int sum(int (int ar2[][4], int size);
-	int total = sum(data, 3);
-	cout << "sum-" << total << endl;
+	//int data[3][4] = { {1,2,3,4},{5,6,7,8},{9,10,11,12} };
+	////函数原型:int sum(int (*ar2)[4], int size);
+	////或者 函数原型:int sum(int (int ar2[][4], int size);
+	//int total = sum(data, 3);
+	//cout << "sum-" << total << endl;
 	
 	/*char s[] = {'s', 'b', 'c' , '\0'};
 	cout << "--" << s << endl;
@@ -98,8 +115,14 @@ int main(void)
 	cin.get();//读取
 	return 0;
 }
+void action(void (*pf)(int))
+{
+	(*pf)(777);//通过函数指针 调用函数
+	pf(666);//也可以这样调用函数,建议用上面一种
+}
 
-void say(int i) {
+void say(int i) 
+{
 
 	cout << endl << "i:" << i << endl;
 }
